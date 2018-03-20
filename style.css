@@ -1,0 +1,32 @@
+
+h1 {
+
+  color: red;
+  font-size: 4em;
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+  padding: 3%;
+}
+
+.randomimage img {
+
+  width: 300px;
+  
+}
+
+li {
+
+  float: left;
+  clear: right;
+}
+
+.randomimage {
+
+  height: 50%;
+}
+
+p {
+
+  font-size: 2em;
+}
