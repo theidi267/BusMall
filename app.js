@@ -10,7 +10,7 @@ var pictureNames = [];
 
 //totalclicks for barchart
 
-var totalClicks = [];
+var allPicClicks = [];
 
 //total displayed to hold total displayed
 
@@ -26,7 +26,7 @@ var allClicks = 24;
 
 //get the list element to push the results in
 
-var resultListElement = document.getElementById('results');
+// var resultListElement = document.getElementById('results');
 
 //make a constuctor function for picture objects
 
@@ -37,6 +37,7 @@ function Picture(filepath, name) {
   this.totalClicks = 0;
   Picture.allPictures.push(this);
   pictureNames.push(this.name);
+   
 }
 
 //make the objects
@@ -87,7 +88,7 @@ function clickCounter(event) {
 
     if ( Picture.allPictures[j].filepath === filename) {
 
-      Picture.allPictures[j].totalClicks++;
+      allPicClicks.push(Picture.allPictures[j].totalClicks++);
       allClicks--;
       handleClicks();
       console.log(allClicks);
@@ -152,6 +153,7 @@ function handleClicks() {
     picElement3.removeEventListener('click', giveThreePics);
     // showResults();
   }
+  renderChart();
 }
 
 // function showResults() {
@@ -184,7 +186,7 @@ function renderChart() {
       labels: pictureNames,
       datasets: [{
         label: 'Most popular thing',
-        data: totalClicks,
+        data: allPicClicks,
         backgroundColor: arrayOfColors,
       }]
     },
