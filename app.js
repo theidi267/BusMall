@@ -9,6 +9,7 @@ Picture.allPictures = [];
 function Picture(filepath, name) {
   this.filepath = filepath;
   this.name = name;
+  this.totalClicks = 0;
   Picture.allPictures.push(this);
 }
 
@@ -41,16 +42,24 @@ console.log(Picture.allPictures);
 var picElement = document.getElementById('pic1');
 var picElement2 = document.getElementById('pic2');
 var picElement3 = document.getElementById('pic3');
-var button = document.getElementById('button');
 
 
 // event listener
 
-button.addEventListener('click', giveThreePics);
+picElement.addEventListener('click', giveThreePics);
+picElement2.addEventListener('click', giveThreePics);
+picElement3.addEventListener('click', giveThreePics);
+
+
+//function to count
+
+function clickCounter(event)
 
 //function to call
 
-function giveThreePics() {
+function giveThreePics(event) {
+
+  console.log(event.target.currentSrc);
 
   var threeNum = [];
 
@@ -70,11 +79,7 @@ function giveThreePics() {
 
   picElement3.src = Picture.allPictures[threeNum[2]].filepath;
   picElement3.alt = Picture.allPictures[threeNum[2]].name;
-  
+
   console.log(threeNum);
+
 }
-
-
-
-
-
