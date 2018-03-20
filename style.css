@@ -17,10 +17,11 @@ h1 {
 
 li {
 
-  float: left;
-  clear: right;
+  padding: 5px;
+  margin: auto;
+  text-align: left;
+  
 }
-
 .randomimage {
 
   height: 50%;

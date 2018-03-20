@@ -104,19 +104,26 @@ function giveThreePics(event) {
     }
   }
 
+
   randNums(0, Picture.allPictures.length);
 
   while ((threeNum[0] === threeNum[1] || threeNum[0] === threeNum[2] || threeNum[1] === threeNum[2]) || (picsLastDisplayed.includes(threeNum[0]) || picsLastDisplayed.includes(threeNum[1]) || picsLastDisplayed.includes(threeNum[2]))) {
 
-    console.log('duplicate');
-
     threeNum = [];
+    
+    randNums(0, Picture.allPictures.length);  
+    
 
-
-    randNums(0, Picture.allPictures.length);
+    // randNums(0, Picture.allPictures.length);
 
     console.log(picsLastDisplayed);
   }
+
+  picsLastDisplayed = [];
+
+  picsLastDisplayed.push(threeNum[0]);
+  picsLastDisplayed.push(threeNum[1]);
+  picsLastDisplayed.push(threeNum[2]);
 
   picElement.src = Picture.allPictures[threeNum[0]].filepath;
   picElement.alt = Picture.allPictures[threeNum[0]].name;
@@ -142,12 +149,28 @@ function handleClicks() {
     picElement.removeEventListener('click', giveThreePics);
     picElement2.removeEventListener('click', giveThreePics);
     picElement3.removeEventListener('click', giveThreePics);
+    showResults();
   }
 }
 
 function showResults() {
-  
+
+  console.log(Picture.allPictures);
+
+
+  for(var i = 0; i < Picture.allPictures.length; i++){
+    
+    console.log('b');
+
+    var resultItemElement = document.createElement('li');
+    resultItemElement.textContent = Picture.allPictures[i].name + ' has ' + Picture.allPictures[i].totalClicks + ' votes and was displayed ' + Picture.allPictures[i].totalDisplayed + ' times.';
+
+    console.log(resultItemElement);
+
+    resultListElement.appendChild(resultItemElement);
+  }
 }
+
 
 
 
