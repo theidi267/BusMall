@@ -36,6 +36,7 @@ function Picture(filepath, name) {
   this.totalDisplayed = 0;
   this.totalClicks = 0;
   Picture.allPictures.push(this);
+  pictureNames.push(this.name);
 }
 
 //make the objects
@@ -149,28 +150,55 @@ function handleClicks() {
     picElement.removeEventListener('click', giveThreePics);
     picElement2.removeEventListener('click', giveThreePics);
     picElement3.removeEventListener('click', giveThreePics);
-    showResults();
+    // showResults();
   }
 }
 
-function showResults() {
+// function showResults() {
 
-  console.log(Picture.allPictures);
+//   console.log(Picture.allPictures);
 
 
-  for(var i = 0; i < Picture.allPictures.length; i++){
+//   for(var i = 0; i < Picture.allPictures.length; i++){
     
-    console.log('b');
+//     console.log('b');
 
-    var resultItemElement = document.createElement('li');
-    resultItemElement.textContent = Picture.allPictures[i].name + ' has ' + Picture.allPictures[i].totalClicks + ' votes and was displayed ' + Picture.allPictures[i].totalDisplayed + ' times.';
+//     var resultItemElement = document.createElement('li');
+//     resultItemElement.textContent = Picture.allPictures[i].name + ' has ' + Picture.allPictures[i].totalClicks + ' votes and was displayed ' + Picture.allPictures[i].totalDisplayed + ' times.';
 
-    console.log(resultItemElement);
+//     console.log(resultItemElement);
 
-    resultListElement.appendChild(resultItemElement);
-  }
+//     resultListElement.appendChild(resultItemElement);
+//   }
+// }
+
+function renderChart() {
+
+  var context = document.getElementById('picture-chart').getContext('2d');
+
+  var arrayOfColors = ['#ffe69', '#ffff99', '#e6ff99', '#ccff99', '#b3ff99', '#99ff99', '#99ffb3', '#99ffcc', '#99ffe6', '#99ffff', '#99e6ff', '#99ccff', '#99b3ff', '#9999ff', '#b399ff', '#cc99ff', '#e699ff', '#ff99ff', '#ff99e6', '#ff99cc'];
+
+  new Chart(context, {
+    type: 'bar',
+    data: {
+      labels: pictureNames,
+      datasets: [{
+        label: 'Most popular thing',
+        data: totalClicks,
+        backgroundColor: arrayOfColors,
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
 }
-
 
 
 
