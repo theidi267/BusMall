@@ -53,13 +53,24 @@ picElement3.addEventListener('click', giveThreePics);
 
 //function to count
 
-function clickCounter(event)
+function clickCounter(event) {
+
+  var splitStuff = event.target.currentSrc.split('/');
+  var filename = splitStuff.slice(splitStuff.length-2, splitStuff.length).join('/');
+
+  for(var j=0; j < Picture.allPictures.length; j++) {
+
+    if ( Picture.allPictures[j].filepath === filename) {
+
+      Picture.allPictures[j].totalClicks++;
+      console.log(Picture.allPictures);
+    }
+  }
+}
 
 //function to call
 
 function giveThreePics(event) {
-
-  console.log(event.target.currentSrc);
 
   var threeNum = [];
 
@@ -79,6 +90,8 @@ function giveThreePics(event) {
 
   picElement3.src = Picture.allPictures[threeNum[2]].filepath;
   picElement3.alt = Picture.allPictures[threeNum[2]].name;
+
+  clickCounter(event);
 
   console.log(threeNum);
 
