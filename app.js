@@ -12,9 +12,11 @@ var pictureNames = [];
 
 var allPicClicks = [];
 
+var storedPicClicks = [];
+
 //total displayed to hold total displayed
 
-var totalDisplayed = [];
+//var totalDisplayed = [];
 
 //last displayed picures
 
@@ -41,7 +43,7 @@ function fillPictureNames() {
   for(var k = 0; k < Picture.allPictures.length; k++){
 
     pictureNames.push(Picture.allPictures[k].name);
-
+    storedPicClicks.push(Picture.allPictures[k].totalClicks);
   }
 }
 
@@ -98,6 +100,13 @@ picElement3.addEventListener('click', giveThreePics);
 
 //function to count
 
+function loadPicsToLS() {
+
+  var savePictures = JSON.stringify(Picture.allPictures);
+  localStorage.setItem('stored', savePictures);
+}
+
+
 function clickCounter(event) {
 
   var splitStuff = event.target.currentSrc.split('/');
@@ -110,12 +119,9 @@ function clickCounter(event) {
       allPicClicks.push(Picture.allPictures[j].totalClicks++);
       allClicks--;
       handleClicks();
-
     }
   }
 }
-
-
 
 function giveThreePics(event) {
 
@@ -134,8 +140,6 @@ function giveThreePics(event) {
     threeNum = [];
 
     randNums(0, Picture.allPictures.length);
-
-
 
     console.log(picsLastDisplayed);
   }
@@ -190,7 +194,7 @@ function renderChart() {
       labels: pictureNames,
       datasets: [{
         label: 'Most popular thing',
-        data: allPicClicks,
+        data: storedPicClicks,
         backgroundColor: arrayOfColors,
       }]
     },
@@ -204,12 +208,6 @@ function renderChart() {
       }
     }
   });
-}
-
-function loadPicsToLS() {
-
-  var savePictures = JSON.stringify(Picture.allPictures);
-  localStorage.setItem('stored', savePictures);
 }
 
 storedPictures();
