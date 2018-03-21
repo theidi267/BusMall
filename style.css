@@ -1,3 +1,13 @@
+html body {
+
+  width:100%;
+}
+
+body {
+
+  background: pink;
+}
+
 
 h1 {
 
@@ -11,7 +21,9 @@ h1 {
 
 .randomimage img {
 
-  width: 300px;
+  height: 300px;
+  padding: 10px;
+  border: solid 5px black;
   
 }
 
@@ -31,3 +43,10 @@ p {
 
   font-size: 2em;
 }
+
+#results {
+
+  text-align: center;
+}
+
+
