@@ -144,6 +144,7 @@ function giveThreePics(event) {
   picsLastDisplayed.push(threeNum[1]);
   picsLastDisplayed.push(threeNum[2]);
 
+  console.log(Picture.allPictures[threeNum[0]].filepath);
   picElement.src = Picture.allPictures[threeNum[0]].filepath;
   picElement.alt = Picture.allPictures[threeNum[0]].name;
   Picture.allPictures[threeNum[0]].totalDisplayed++;
@@ -160,6 +161,8 @@ function giveThreePics(event) {
 
   console.log(threeNum);
 }
+
+
 
 function handleClicks() {
 
@@ -202,6 +205,7 @@ function renderChart() {
 }
 
 storedPictures();
+giveThreePics();
 
 
 
