@@ -37,7 +37,7 @@ function Picture(filepath, name) {
   this.totalClicks = 0;
   Picture.allPictures.push(this);
   pictureNames.push(this.name);
-   
+
 }
 
 //make the objects
@@ -112,9 +112,9 @@ function giveThreePics(event) {
   while ((threeNum[0] === threeNum[1] || threeNum[0] === threeNum[2] || threeNum[1] === threeNum[2]) || (picsLastDisplayed.includes(threeNum[0]) || picsLastDisplayed.includes(threeNum[1]) || picsLastDisplayed.includes(threeNum[2]))) {
 
     threeNum = [];
-    
-    randNums(0, Picture.allPictures.length);  
-    
+
+    randNums(0, Picture.allPictures.length);
+
 
     // randNums(0, Picture.allPictures.length);
 
@@ -151,28 +151,12 @@ function handleClicks() {
     picElement.removeEventListener('click', giveThreePics);
     picElement2.removeEventListener('click', giveThreePics);
     picElement3.removeEventListener('click', giveThreePics);
-    // showResults();
+
+    renderChart();
   }
-  renderChart();
 }
 
-// function showResults() {
-
-//   console.log(Picture.allPictures);
-
-
-//   for(var i = 0; i < Picture.allPictures.length; i++){
-    
-//     console.log('b');
-
-//     var resultItemElement = document.createElement('li');
-//     resultItemElement.textContent = Picture.allPictures[i].name + ' has ' + Picture.allPictures[i].totalClicks + ' votes and was displayed ' + Picture.allPictures[i].totalDisplayed + ' times.';
-
-//     console.log(resultItemElement);
-
-//     resultListElement.appendChild(resultItemElement);
-//   }
-// }
+giveThreePics();
 
 function renderChart() {
 
@@ -201,6 +185,7 @@ function renderChart() {
     }
   });
 }
+
 
 
 
