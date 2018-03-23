@@ -11,9 +11,14 @@ h1 {
 
 .randomimage img {
 
-  width: 300px;
-  
+  border: solid 2px black;
+  height: 350px;
+  width: 250px;
+  -o-object-fit: contain;
+  object-fit: contain;
+
 }
+
 
 li {
 

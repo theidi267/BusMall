@@ -104,7 +104,6 @@ function giveThreePics(event) {
     }
   }
 
-
   randNums(0, Picture.allPictures.length);
 
   while ((threeNum[0] === threeNum[1] || threeNum[0] === threeNum[2] || threeNum[1] === threeNum[2]) || (picsLastDisplayed.includes(threeNum[0]) || picsLastDisplayed.includes(threeNum[1]) || picsLastDisplayed.includes(threeNum[2]))) {
@@ -112,9 +111,6 @@ function giveThreePics(event) {
     threeNum = [];
     
     randNums(0, Picture.allPictures.length);  
-    
-
-    // randNums(0, Picture.allPictures.length);
 
     console.log(picsLastDisplayed);
   }
@@ -170,6 +166,8 @@ function showResults() {
     resultListElement.appendChild(resultItemElement);
   }
 }
+giveThreePics();
+
 
 
 
