@@ -5,13 +5,13 @@ html body {
 
 body {
 
-  background: pink;
+  background: radial-gradient(silver, seashell, rgb(223, 223, 196), rgb(155, 177, 155));
 }
 
 
 h1 {
 
-  color: red;
+  color: seagreen;
   font-size: 4em;
   font-weight: bold;
   text-align: center;
@@ -21,10 +21,20 @@ h1 {
 
 .randomimage img {
 
-  height: 300px;
-  padding: 10px;
-  border: solid 5px black;
-  
+  border: solid 2px black;
+  height: 270px;
+  width: 300px;
+  -o-object-fit: contain;
+  object-fit: contain;
+  background: white;
+  margin-top: 25px;
+}
+
+section {
+
+width: 960px;
+margin: auto;
+
 }
 
 li {
@@ -41,6 +51,7 @@ li {
 
 p {
 
+  text-align: center;
   font-size: 2em;
 }
 

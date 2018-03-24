@@ -26,7 +26,6 @@ var picsLastDisplayed = [];
 
 var allClicks = 24;
 
-
 function Picture(filepath, name) {
   this.filepath = filepath;
   this.name = name;
@@ -34,7 +33,6 @@ function Picture(filepath, name) {
   this.totalClicks = 0;
   Picture.allPictures.push(this);
   pictureNames.push(this.name);
-
 }
 
 //make the objects
@@ -55,7 +53,6 @@ function storedPictures() {
     Picture.allPictures = picsFromStorage;
 
     fillPictureNames();
-    // console.log('Loaded from Local Storage');
     return;
   }
 
@@ -92,18 +89,15 @@ var picElement2 = document.getElementById('pic2');
 var picElement3 = document.getElementById('pic3');
 
 
-// event listener
-
 picElement.addEventListener('click', giveThreePics);
 picElement2.addEventListener('click', giveThreePics);
 picElement3.addEventListener('click', giveThreePics);
-
-//function to count
 
 function loadPicsToLS() {
 
   var savePictures = JSON.stringify(Picture.allPictures);
   localStorage.setItem('stored', savePictures);
+  
 }
 
 
@@ -124,7 +118,7 @@ function clickCounter(event) {
 }
 
 function giveThreePics(event) {
-
+  
   var threeNum = [];
 
   function randNums(min, max) {
@@ -150,6 +144,7 @@ function giveThreePics(event) {
   picsLastDisplayed.push(threeNum[1]);
   picsLastDisplayed.push(threeNum[2]);
 
+  console.log(Picture.allPictures[threeNum[0]].filepath);
   picElement.src = Picture.allPictures[threeNum[0]].filepath;
   picElement.alt = Picture.allPictures[threeNum[0]].name;
   Picture.allPictures[threeNum[0]].totalDisplayed++;
@@ -167,6 +162,8 @@ function giveThreePics(event) {
   console.log(threeNum);
 }
 
+
+
 function handleClicks() {
 
   if (allClicks === 0) {
@@ -176,13 +173,10 @@ function handleClicks() {
     picElement3.removeEventListener('click', giveThreePics);
     loadPicsToLS();
     renderChart();
-
-    // showResults();
   }
 }
 
 function renderChart() {
-
 
   var context = document.getElementById('picture-chart').getContext('2d');
 
@@ -211,6 +205,7 @@ function renderChart() {
 }
 
 storedPictures();
+giveThreePics();
 
 
 
