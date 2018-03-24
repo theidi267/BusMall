@@ -24,7 +24,7 @@ var picsLastDisplayed = [];
 
 //click tracker
 
-var allClicks = 24;
+var allClicks = 25;
 
 function Picture(filepath, name) {
   this.filepath = filepath;
@@ -45,17 +45,18 @@ function fillPictureNames() {
   }
 }
 
-function storedPictures() {
+function storedPictures() {  
 
   var picsStored = localStorage.getItem('stored');
   var picsFromStorage = JSON.parse(picsStored);
-  if ( picsFromStorage && picsFromStorage.length ) {
+  if (picsFromStorage && picsFromStorage.length) {
     Picture.allPictures = picsFromStorage;
 
     fillPictureNames();
+     
     return;
   }
-
+  
   console.log('Doing it the hard way');
 
   new Picture('img/bag.jpg', 'Bag');
@@ -77,7 +78,7 @@ function storedPictures() {
   new Picture('img/usb.gif', 'Tentacle usb drive');
   new Picture('img/water-can.jpg', 'Watering can');
   new Picture('img/wine-glass.jpg', 'Wineglass');
-
+    
 }
 
 // console.log(Picture.allPictures);
@@ -97,9 +98,7 @@ function loadPicsToLS() {
 
   var savePictures = JSON.stringify(Picture.allPictures);
   localStorage.setItem('stored', savePictures);
-  
 }
-
 
 function clickCounter(event) {
 
@@ -118,7 +117,7 @@ function clickCounter(event) {
 }
 
 function giveThreePics(event) {
-  
+
   var threeNum = [];
 
   function randNums(min, max) {
@@ -135,7 +134,8 @@ function giveThreePics(event) {
 
     randNums(0, Picture.allPictures.length);
 
-    console.log(picsLastDisplayed);
+    loadPicsToLS();
+
   }
 
   picsLastDisplayed = [];
@@ -158,11 +158,7 @@ function giveThreePics(event) {
   Picture.allPictures[threeNum[2]].totalDisplayed++;
 
   clickCounter(event);
-
-  console.log(threeNum);
 }
-
-
 
 function handleClicks() {
 
@@ -171,7 +167,7 @@ function handleClicks() {
     picElement.removeEventListener('click', giveThreePics);
     picElement2.removeEventListener('click', giveThreePics);
     picElement3.removeEventListener('click', giveThreePics);
-    loadPicsToLS();
+   
     renderChart();
   }
 }
@@ -206,6 +202,7 @@ function renderChart() {
 
 storedPictures();
 giveThreePics();
+
 
 
 
