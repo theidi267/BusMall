@@ -24,7 +24,7 @@ var picsLastDisplayed = [];
 
 //click tracker
 
-var allClicks = 25;
+var allClicks = 5;
 
 function Picture(filepath, name) {
   this.filepath = filepath;
@@ -42,10 +42,15 @@ function fillPictureNames() {
 
     pictureNames.push(Picture.allPictures[k].name);
     storedPicClicks.push(Picture.allPictures[k].totalClicks);
+
+    if(storedPicClicks.length === 0) {
+      for(var p=0; p < Picture.allPictures.length; p++)
+        storedPicClicks.push(Picture.allPictures[p].totalClicks);
+    }
   }
 }
 
-function storedPictures() {  
+function storedPictures() {
 
   var picsStored = localStorage.getItem('stored');
   var picsFromStorage = JSON.parse(picsStored);
@@ -53,10 +58,10 @@ function storedPictures() {
     Picture.allPictures = picsFromStorage;
 
     fillPictureNames();
-     
+    
     return;
   }
-  
+
   console.log('Doing it the hard way');
 
   new Picture('img/bag.jpg', 'Bag');
@@ -78,7 +83,7 @@ function storedPictures() {
   new Picture('img/usb.gif', 'Tentacle usb drive');
   new Picture('img/water-can.jpg', 'Watering can');
   new Picture('img/wine-glass.jpg', 'Wineglass');
-    
+
 }
 
 // console.log(Picture.allPictures);
@@ -125,17 +130,14 @@ function giveThreePics(event) {
       threeNum.push(Math.floor(Math.random()*max)+min);
     }
   }
-
+  
   randNums(0, Picture.allPictures.length);
 
   while ((threeNum[0] === threeNum[1] || threeNum[0] === threeNum[2] || threeNum[1] === threeNum[2]) || (picsLastDisplayed.includes(threeNum[0]) || picsLastDisplayed.includes(threeNum[1]) || picsLastDisplayed.includes(threeNum[2]))) {
 
     threeNum = [];
-
     randNums(0, Picture.allPictures.length);
-
     loadPicsToLS();
-
   }
 
   picsLastDisplayed = [];
@@ -167,8 +169,9 @@ function handleClicks() {
     picElement.removeEventListener('click', giveThreePics);
     picElement2.removeEventListener('click', giveThreePics);
     picElement3.removeEventListener('click', giveThreePics);
-   
+
     renderChart();
+    fillPictureNames();
   }
 }
 
