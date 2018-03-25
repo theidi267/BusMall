@@ -1,7 +1,4 @@
 
-
-//array to hold all the pctures as objects
-
 Picture.allPictures = [];
 
 //Picture names for chart labels
@@ -24,7 +21,7 @@ var picsLastDisplayed = [];
 
 //click tracker
 
-var allClicks = 24;
+var allClicks = 5;
 
 function Picture(filepath, name) {
   this.filepath = filepath;
@@ -49,12 +46,12 @@ function storedPictures() {
 
   var picsStored = localStorage.getItem('stored');
   var picsFromStorage = JSON.parse(picsStored);
-  if ( picsFromStorage && picsFromStorage.length ) {
+  if ( picsFromStorage && picsFromStorage.length) {
     Picture.allPictures = picsFromStorage;
-
     fillPictureNames();
-    return;
+    return
   }
+
 
   console.log('Doing it the hard way');
 
@@ -97,7 +94,7 @@ function loadPicsToLS() {
 
   var savePictures = JSON.stringify(Picture.allPictures);
   localStorage.setItem('stored', savePictures);
-  
+
 }
 
 
@@ -118,7 +115,7 @@ function clickCounter(event) {
 }
 
 function giveThreePics(event) {
-  
+
   var threeNum = [];
 
   function randNums(min, max) {
@@ -171,7 +168,7 @@ function handleClicks() {
     picElement.removeEventListener('click', giveThreePics);
     picElement2.removeEventListener('click', giveThreePics);
     picElement3.removeEventListener('click', giveThreePics);
-    loadPicsToLS();
+    loadPicsToLS();    
     renderChart();
   }
 }
@@ -203,6 +200,5 @@ function renderChart() {
     }
   });
 }
-
 storedPictures();
 giveThreePics();
