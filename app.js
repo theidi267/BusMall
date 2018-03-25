@@ -24,7 +24,7 @@ var picsLastDisplayed = [];
 
 //click tracker
 
-var allClicks = 5;
+var allClicks = 24;
 
 function Picture(filepath, name) {
   this.filepath = filepath;
@@ -43,21 +43,16 @@ function fillPictureNames() {
     pictureNames.push(Picture.allPictures[k].name);
     storedPicClicks.push(Picture.allPictures[k].totalClicks);
   }
-  // if(storedPicClicks.length === 0) {
-  //   for(var p=0; p < Picture.allPictures.length; p++)
-  //     storedPicClicks.push(Picture.allPictures[p].totalClicks);
-  // }
 }
 
 function storedPictures() {
 
   var picsStored = localStorage.getItem('stored');
   var picsFromStorage = JSON.parse(picsStored);
-  if (picsFromStorage && picsFromStorage.length) {
+  if ( picsFromStorage && picsFromStorage.length ) {
     Picture.allPictures = picsFromStorage;
 
     fillPictureNames();
-
     return;
   }
 
@@ -102,7 +97,9 @@ function loadPicsToLS() {
 
   var savePictures = JSON.stringify(Picture.allPictures);
   localStorage.setItem('stored', savePictures);
+  
 }
+
 
 function clickCounter(event) {
 
@@ -121,14 +118,13 @@ function clickCounter(event) {
 }
 
 function giveThreePics(event) {
-
+  
   var threeNum = [];
 
   function randNums(min, max) {
     for(var i=0 ; i < 3 ; i++) {
       threeNum.push(Math.floor(Math.random()*max)+min);
     }
-    loadPicsToLS();
   }
 
   randNums(0, Picture.allPictures.length);
@@ -136,8 +132,10 @@ function giveThreePics(event) {
   while ((threeNum[0] === threeNum[1] || threeNum[0] === threeNum[2] || threeNum[1] === threeNum[2]) || (picsLastDisplayed.includes(threeNum[0]) || picsLastDisplayed.includes(threeNum[1]) || picsLastDisplayed.includes(threeNum[2]))) {
 
     threeNum = [];
+
     randNums(0, Picture.allPictures.length);
-    // loadPicsToLS();
+
+    console.log(picsLastDisplayed);
   }
 
   picsLastDisplayed = [];
@@ -160,7 +158,11 @@ function giveThreePics(event) {
   Picture.allPictures[threeNum[2]].totalDisplayed++;
 
   clickCounter(event);
+
+  console.log(threeNum);
 }
+
+
 
 function handleClicks() {
 
@@ -169,9 +171,8 @@ function handleClicks() {
     picElement.removeEventListener('click', giveThreePics);
     picElement2.removeEventListener('click', giveThreePics);
     picElement3.removeEventListener('click', giveThreePics);
-
+    loadPicsToLS();
     renderChart();
-    fillPictureNames();
   }
 }
 
@@ -180,12 +181,6 @@ function renderChart() {
   var context = document.getElementById('picture-chart').getContext('2d');
 
   var arrayOfColors = ['#ffe69', '#ffff99', '#e6ff99', '#ccff99', '#b3ff99', '#99ff99', '#99ffb3', '#99ffcc', '#99ffe6', '#99ffff', '#99e6ff', '#99ccff', '#99b3ff', '#9999ff', '#b399ff', '#cc99ff', '#e699ff', '#ff99ff', '#ff99e6', '#ff99cc'];
-
-  if(storedPicClicks.length === 0) {
-    for(var p=0; p < Picture.allPictures.length; p++)
-      pictureNames.push(Picture.allPictures[p].name);
-    storedPicClicks.push(Picture.allPictures[p].totalClicks);
-  }
 
   new Chart(context, {
     type: 'bar',
@@ -211,10 +206,3 @@ function renderChart() {
 
 storedPictures();
 giveThreePics();
-
-
-
-
-
-
-
